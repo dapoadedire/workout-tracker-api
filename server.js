@@ -2,12 +2,20 @@ import express from "express";
 import dotenv from "dotenv";
 import { workoutRoutes } from "./routes/workouts.route.js";
 import { connecToMongoDB } from "./config/workout.db.js";
+import cors from "cors";
+
+
 
 dotenv.config();
 connecToMongoDB();
 
+
+
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Cors
+app.use(cors());
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
