@@ -2,7 +2,7 @@ import { WorkoutModel } from "../models/workout.model.js";
 
 export const getAllWorkouts = async (req, res) => {
   try {
-    const workouts = await WorkoutModel.find();
+    const workouts = await WorkoutModel.find({}).sort({ createdAt: -1 });
     res.status(200).json(workouts);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -46,17 +46,21 @@ export const deleteWorkout = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-};
+};   
 
 export const updateWorkout = async (req, res) => {
   const { id } = req.params;
   const { title, reps, load } = req.body;
 
   try {
+    // const updatedWorkout = await WorkoutModel.findByIdAndUpdate(
+    //   id,
+    //   { title, reps, load },
+    //   { new: true }
+    // );
     const updatedWorkout = await WorkoutModel.findByIdAndUpdate(
-      id,
-      { title, reps, load },
-      { new: true }
+     { _id: id },
+     ...req.body,
     );
 
     if (!updatedWorkout) {
