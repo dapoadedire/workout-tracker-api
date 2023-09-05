@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllWorkouts, getWorkoutById, createWorkout, deleteWorkout, updateWorkout } from "../controllers/workouts.controller.js";
+import { getAllWorkouts, getWorkoutById, createWorkout, deleteWorkout, updateWorkout } from "../controllers/workout.controller.js";
 
 const routes = express.Router();
 
