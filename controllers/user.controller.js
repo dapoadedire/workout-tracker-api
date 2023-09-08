@@ -23,7 +23,6 @@ const loginUser = async (req, res) => {
 
         // create access token
         const accessToken = createAccessToken(user._id);
-        console.log("accessToken is : ", accessToken);
 
         res.status(201).json({
             email,
