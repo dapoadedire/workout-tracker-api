@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import { workoutRoutes } from "./routes/workouts.route.js";
+import { userRoutes } from "./routes/user.route.js";
 import { connecToMongoDB } from "./config/workout.db.js";
 import cors from "cors";
 
@@ -30,8 +31,13 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to the Workout Tracker API!" });
 });
 
-// Define your routes here
+// Workout routes
 app.use("/api/workouts", workoutRoutes);
+
+
+// User routes
+app.use("/api/user", userRoutes);
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
