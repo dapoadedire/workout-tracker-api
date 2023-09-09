@@ -45,8 +45,7 @@ const signupUser = async (req, res) => {
 
         // create access token
         const accessToken = createAccessToken(newUser._id);
-        console.log("accessToken is : ", accessToken);
-
+       
         res.status(201).json({
             email,
             token: accessToken,

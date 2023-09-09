@@ -74,9 +74,7 @@ userSchema.statics.signup = async function (email, password) {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    //   console.log(ADMIN_EMAIL == email )
-    //   console.log(ADMIN_EMAIL)
-    //   console.log(email)
+    
 
     const newUser = await this.create({
         email,
@@ -108,7 +106,7 @@ userSchema.statics.login = async function (email, password) {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-        throw new Error("Invalid credentials");
+        throw new Error("Password is incorrect");
     }
 
     return user;
