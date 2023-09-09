@@ -2,7 +2,9 @@ import { WorkoutModel } from "../models/workout.model.js";
 
 export const getAllWorkouts = async (req, res) => {
   try {
-    const workouts = await WorkoutModel.find({}).sort({ createdAt: -1 });
+
+    const user_id = req.user._id;
+    const workouts = await WorkoutModel.find({user_id}).sort({ createdAt: -1 });
     res.status(200).json(workouts);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -24,7 +26,8 @@ export const createWorkout = async (req, res) => {
   const { title, reps, load } = req.body;
 
   try {
-    const workout = await WorkoutModel.create({ title, reps, load });
+    const user_id = req.user._id;
+    const workout = await WorkoutModel.create({ title, reps, load, user_id });
     res.status(201).json({
       message: "Workout created successfully",
       workout,
